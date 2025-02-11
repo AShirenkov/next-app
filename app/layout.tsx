@@ -1,4 +1,4 @@
-// import "./globals.css";
+import "./globals.css";
 import { TheFooter } from "@/components/TheFooter";
 import { TheHeader } from "@/components/TheHeader";
 import type { Metadata } from "next";
