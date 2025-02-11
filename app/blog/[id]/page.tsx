@@ -8,19 +8,18 @@ async function getData(id: string) {
 }
 
 type Props = {
-  params: {
-    id: string;
-  };
+  params: Promise<{ id: string }>;
 };
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { id } = params;
+  const { id } = await params;
   const post = await getData(id);
   return {
     title: post.title,
   };
 }
 export default async function Post({ params }: Props) {
-  const { id } = params;
+  const { id } = await params;
   const post = await getData(id);
 
   return (
