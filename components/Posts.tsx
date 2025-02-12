@@ -1,26 +1,29 @@
 "use client";
+import { getAllPosts } from "@/services/getPosts";
 import Link from "next/link";
-import { usePosts } from "@/store";
-import { useEffect, useMemo } from "react";
+import useSWR from "swr";
+// import { usePosts } from "@/store";
+// import { useEffect, useMemo } from "react";
 
 export const Posts = () => {
-  const store = usePosts();
-  const { posts, loading, getAllPosts } = useMemo(
-    () => ({
-      posts: store.posts,
-      loading: store.loading,
-      getAllPosts: store.getAllPosts,
-    }),
-    [store.posts, store.loading, store.getAllPosts]
-  );
+  const { data: posts, isLoading } = useSWR("posts", getAllPosts);
+  //   const store = usePosts();
+  //   const { posts, loading, getAllPosts } = useMemo(
+  //     () => ({
+  //       posts: store.posts,
+  //       loading: store.loading,
+  //       getAllPosts: store.getAllPosts,
+  //     }),
+  //     [store.posts, store.loading, store.getAllPosts]
+  //   );
 
-  useEffect(() => {
-    if (!posts.length) {
-      getAllPosts();
-    }
-  }, [posts.length, getAllPosts]);
+  //   useEffect(() => {
+  //     if (!posts.length) {
+  //       getAllPosts();
+  //     }
+  //   }, [posts.length, getAllPosts]);
 
-  return loading ? (
+  return isLoading ? (
     <h3>Loading...</h3>
   ) : (
     <ul>
