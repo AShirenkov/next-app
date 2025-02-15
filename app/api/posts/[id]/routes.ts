@@ -8,10 +8,10 @@ export async function DELETE(
 ) {
   const id = params.id;
 
-  const headersList = headers();
+  const headersList = await headers();
   const type = headersList.get("Content-Type");
 
-  const cookiesList = cookies();
+  const cookiesList = await cookies();
   const coo1 = cookiesList.get("Cookie_1")?.value;
 
   // redirect("/blog");
